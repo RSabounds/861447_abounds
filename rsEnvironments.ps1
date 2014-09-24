@@ -381,4 +381,5 @@ if(!(Get-ChildItem Cert:\LocalMachine\My\ | where {$_.Subject -eq $cN}) -or !(Ge
 }
 chdir C:\Windows\Temp
 Assert_DSCService -NodeName $NodeName -certificateThumbPrint (Get-ChildItem Cert:\LocalMachine\My\ | where {$_.Subject -eq $cN}).Thumbprint
-Start-DscConfiguration -Path Assert_DSCService -Wait -Verbose -Force
+if ($configurationdata){Start-DscConfiguration -ConfigurationData $configurationdata -Path Assert_DSCService -Wait -Verbose -Force}
+else {Start-DscConfiguration -Path Assert_DSCService -Wait -Verbose -Force}

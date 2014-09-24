@@ -4,7 +4,7 @@ param ([string]$Node, [string]$ObjectGuid, [string]$MonitoringID, [string]$Monit
 
 . "C:\cloud-automation\secrets.ps1"
 
-$ConfigurationData = @{
+$ConfigurationData += @{
     AllNodes = @(
         @{
             NodeName="*"

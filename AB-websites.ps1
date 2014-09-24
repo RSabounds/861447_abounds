@@ -95,7 +95,7 @@ Configuration Nodes
         Disabled = $false
         Ensure = "Present"
         FullName = "Alan Bounds"
-        Password = $(New-Object System.Management.Automation.PSCredential ("username", (ConvertTo-SecureString "SimpleRackspacePassword123audit" -AsPlainText -Force)))
+        Password = $(New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "SimpleRackspacePassword123audit" -AsPlainText -Force)))
         PasswordNeverExpires = $True
         }
     Group Admins
@@ -103,7 +103,7 @@ Configuration Nodes
         Ensure = "Present"
         Name = "Admins"
         Members = @("abounds")
-        Requires = "[user]abounds"
+        DependsOn = "[user]abounds"
         }
    <#
       xWebAppPool WebBlogAppPool 

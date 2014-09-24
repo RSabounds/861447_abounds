@@ -129,6 +129,22 @@ configuration Assert_DSCService
       
       ### Environment section commented out for template, please edit this section for your own environment builds
       
+      rsCloudServersOpenStack AB-websites
+      {
+        Ensure = "Present"
+        minNumberOfDevices = 1
+        maxNumberOfDevices = 9
+        namingConvention = "Farm"
+        image = "Windows Server 2012"
+        nflavor = "performance1-4"
+        dataCenter = "DFW"
+        role = "webFarm"
+        pullServerName = "ABPull001"
+        environmentGuid = "83fe009d-8355-40f0-a177-fec2082b7fec"
+        BuildTimeOut = 30
+        EnvironmentName = "AB-websites"
+      }
+      
 <#
       rsCloudServersOpenStack DFWwebfarm
       {

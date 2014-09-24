@@ -101,8 +101,8 @@ Configuration Nodes
     Group Admins
         {
         Ensure = "Present"
-        Name = "Admins"
-        Members = @("abounds")
+        GroupName = "Admins"
+        MembersToInclude = @("abounds")
         DependsOn = "[user]abounds"
         }
    <#

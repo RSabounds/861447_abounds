@@ -4,15 +4,6 @@ param ([string]$Node, [string]$ObjectGuid, [string]$MonitoringID, [string]$Monit
 
 . "C:\cloud-automation\secrets.ps1"
 
-$ConfigurationData += @{
-    AllNodes = @(
-        @{
-            NodeName="*"
-            PSDscAllowPlainTextPassword=$true
-         }
-   )
-}
-
 Configuration Nodes
 {
    Import-DSCResource -ModuleName rsScheduledTask

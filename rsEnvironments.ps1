@@ -134,7 +134,7 @@ configuration Assert_DSCService
         Ensure = "Present"
         minNumberOfDevices = 1
         maxNumberOfDevices = 9
-        namingConvention = "Farm"
+        namingConvention = "ABFarm"
         image = "Windows Server 2012"
         nflavor = "performance1-4"
         dataCenter = "DFW"

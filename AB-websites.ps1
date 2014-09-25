@@ -8,10 +8,10 @@ param ([string]$Node, [string]$ObjectGuid, [string]$MonitoringID, [string]$Monit
 # Import RS Cloud and Github account information.
 ##################################################################################################################################
 
-$ConfigurationData += @{
+$ConfigurationData = @{
     AllNodes = @(
         @{
-            NodeName="*"
+            NodeName="$env:computername"
             PSDscAllowPlainTextPassword=$true
          }
    )

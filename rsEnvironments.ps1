@@ -392,6 +392,6 @@ if(!(Get-ChildItem Cert:\LocalMachine\My\ | where {$_.Subject -eq $cN}) -or !(Ge
    powershell.exe certutil -addstore -f root $($d.wD, $d.mR, "Certificates\PullServer.cert.pfx" -join '\')
 }
 chdir C:\Windows\Temp
-Assert_DSCService -NodeName $NodeName -certificateThumbPrint (Get-ChildItem Cert:\LocalMachine\My\ | where {$_.Subject -eq $cN}).Thumbprint
-if ($configurationdata){Start-DscConfiguration -ConfigurationData $configurationdata -Path Assert_DSCService -Wait -Verbose -Force}
-else {Start-DscConfiguration -Path Assert_DSCService -Wait -Verbose -Force}
+if($ConfigurationData){Assert_DSCService -ConfigurationData $ConfigurationData -NodeName $NodeName -certificateThumbPrint (Get-ChildItem Cert:\LocalMachine\My\ | where {$_.Subject -eq $cN}).Thumbprint
+}else{Assert_DSCService -NodeName $NodeName -certificateThumbPrint (Get-ChildItem Cert:\LocalMachine\My\ | where {$_.Subject -eq $cN}).Thumbprint}
+Start-DscConfiguration -Path Assert_DSCService -Wait -Verbose -Force

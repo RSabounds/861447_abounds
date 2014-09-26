@@ -102,7 +102,7 @@ Configuration Nodes
         }
 
     $PScred_abounds = New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "Thesteh8sas#4+e8" -AsPlainText -Force))
-    $PScred_testuser = New-Object System.Management.Automation.PSCredential ("testuser", (ConvertTo-SecureString "Thetest7shd#5-c3" -AsPlainText -Force))
+    $PScred_testuser = New-Object System.Management.Automation.PSCredential ("testuser", (ConvertTo-SecureString "Thetest7shd#5-cX" -AsPlainText -Force))
     
     User abounds
         {
@@ -114,18 +114,11 @@ Configuration Nodes
         Password = $PScred_abounds
         PasswordNeverExpires = $True
         }
-<#
-    User testuser
-        {
-        Username = $PScred_testuser.UserName
-        Ensure = "Absent"
-        }
-#>
     User testuser
         {
         UserName = $PScred_testuser.UserName
         Description = "Test User"
-        Disabled = $False
+        Disabled = $True
         Ensure = "Present"
         FullName = "Test User"
         Password = $PScred_testuser

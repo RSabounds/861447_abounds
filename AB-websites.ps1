@@ -23,6 +23,7 @@ Configuration Nodes
    Import-DSCResource -ModuleName rsGit
    Import-DSCResource -ModuleName msWebAdministration
    Import-DSCResource -ModuleName rsWebConfiguration
+   Import-DSCResource -ModuleName rsWPI
    
    Node $Node
    {       
@@ -116,8 +117,8 @@ Configuration Nodes
         DependsOn = @("[File]WebPath")
         }
 
-    $PScred_abounds = New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "Thesteh8sas#4+e8" -AsPlainText -Force))
-    $PScred_testuser = New-Object System.Management.Automation.PSCredential ("testuser", (ConvertTo-SecureString "Thetest7shd#5-cX" -AsPlainText -Force))
+    $PScred_abounds = New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "Fordteh8sas#4+e8" -AsPlainText -Force))
+    $PScred_testuser = New-Object System.Management.Automation.PSCredential ("testuser", (ConvertTo-SecureString "Friendtest7shd#5-cX" -AsPlainText -Force))
     
     User abounds
         {

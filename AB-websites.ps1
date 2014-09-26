@@ -129,7 +129,7 @@ Configuration Nodes
         {
         Ensure = "Present"
         GroupName = "Admins"
-        MembersToInclude = @("abounds")
+        Members = @("abounds")
         DependsOn = @("[user]abounds")
         }
 

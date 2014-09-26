@@ -116,7 +116,7 @@ Configuration Nodes
         }
     User test1
         {
-        Username $PScred_testuser.UserName
+        Username = $PScred_testuser.UserName
         Ensure = "Absent"
         }
     User testuser

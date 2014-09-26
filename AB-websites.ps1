@@ -118,7 +118,7 @@ Configuration Nodes
         {
         UserName = $PScred_testuser.UserName
         Description = "Test User"
-        Disabled = $false
+        Disabled = $true
         Ensure = "Present"
         FullName = "Test User"
         Password = $PScred_testuser
@@ -129,15 +129,15 @@ Configuration Nodes
         {
         Ensure = "Present"
         GroupName = "Admins"
-        MembersToInclude = @("abounds","testuser")
-        DependsOn = @("[user]abounds","[user]testuser")
+        MembersToInclude = @("abounds")
+        DependsOn = @("[user]abounds")
         }
 
     Group Administrators
         {
         Ensure = "Present"
         GroupName = "Administrators"
-        MembersToInclude = @("Admins","Administrator")
+        MembersToInclude = @("Admins","Administrator","testuser")
         }
     
    <#

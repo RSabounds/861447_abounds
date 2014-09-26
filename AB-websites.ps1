@@ -22,6 +22,7 @@ Configuration Nodes
    Import-DSCResource -ModuleName rsScheduledTask
    Import-DSCResource -ModuleName rsGit
    Import-DSCResource -ModuleName msWebAdministration
+   Import-DSCResource -ModuleName rsWebConfiguration
    
    Node $Node
    {       

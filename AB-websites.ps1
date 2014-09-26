@@ -114,6 +114,11 @@ Configuration Nodes
         Password = $PScred_abounds
         PasswordNeverExpires = $True
         }
+    User test1
+        {
+        Username $PScred_testuser.UserName
+        Ensure = "Absent"
+        }
     User testuser
         {
         UserName = $PScred_testuser.UserName

@@ -75,7 +75,7 @@ Configuration Nodes
       { 
          Name   = "WinDevOps" 
          Ensure = "Present" 
-         ApplicationPool = "WinDevOps"
+         ApplicationPool = "ABBlog"
          BindingInfo = MSFT_xWebBindingInformation 
          { 
             Port = 80
@@ -84,7 +84,7 @@ Configuration Nodes
          }
          PhysicalPath = "D:\WebSites\ABWinDevOps"
          State = "Started" 
-         DependsOn = @("[xWebAppPool]ABAppPool","[file]WebPath") 
+         DependsOn = @("[xWebAppPool]ABAppPool","[file]WebPath","[file]indexfile") 
       }
       File WebPath 
          {

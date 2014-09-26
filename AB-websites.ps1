@@ -118,7 +118,7 @@ Configuration Nodes
         }
 
     $PScred_abounds = New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "Fordteh8sas#4+e8" -AsPlainText -Force))
-    $PScred_testuser = New-Object System.Management.Automation.PSCredential ("testuser", (ConvertTo-SecureString "Friendtest7shd#5-cX" -AsPlainText -Force))
+    $PScred_testuser = New-Object System.Management.Automation.PSCredential ("testuser", (ConvertTo-SecureString "Friendst7shd#5-cX" -AsPlainText -Force))
     
     User abounds
         {

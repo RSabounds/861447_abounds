@@ -101,23 +101,45 @@ Configuration Nodes
         DependsOn = @("[File]WebPath")
         }
 
+    $PScred_abounds = New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "Thesteh8sas#4+e8" -AsPlainText -Force))
+    $PScred_testuser = New-Object System.Management.Automation.PSCredential ("testuser", (ConvertTo-SecureString "Thetest7shd#5-c3" -AsPlainText -Force))
+    
     User abounds
         {
-        UserName = "abounds"
-        Description = "Test User"
+        UserName = $PScred_abounds.UserName
+        Description = "Test abounds"
         Disabled = $false
         Ensure = "Present"
         FullName = "Alan Bounds"
-        Password = $(New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "Thesteh8sas#4+e8" -AsPlainText -Force)))
+        Password = $PScred_abounds
         PasswordNeverExpires = $True
         }
+    User testuser
+        {
+        UserName = $PScred_testuser.UserName
+        Description = "Test User"
+        Disabled = $false
+        Ensure = "Present"
+        FullName = "Test User"
+        Password = $PScred_abounds
+        PasswordNeverExpires = $False
+        }
+
     Group Admins
         {
         Ensure = "Present"
         GroupName = "Admins"
-        MembersToInclude = @("abounds")
-        DependsOn = "[user]abounds"
+        MembersToInclude = @("abounds","testuser")
+        DependsOn = @("[user]abounds","[user]testuser")
         }
+
+    Group Administrators
+        {
+        Ensure = "Present"
+        GroupName = "Administrators"
+        MembersToInclude = @("Admins","Administrator")
+        }
+    
    <#
       xWebAppPool WebBlogAppPool 
       { 

@@ -287,5 +287,14 @@ Configuration rsPlatform
     Branch = "v1.0.0"
     Logging = $false
   }
+  rsGit rsWebConfiguration
+  {
+    name = "rsWebAdministration"
+    Source = "https://github.com/rsWinAutomationSupport/rsWebConfiguration.git"
+    Destination = $($d.wD)
+    Ensure = $Ensure
+    Branch = "master"
+    Logging = $false
+  }
 }
        

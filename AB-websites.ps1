@@ -114,12 +114,13 @@ Configuration Nodes
         Password = $PScred_abounds
         PasswordNeverExpires = $True
         }
+<#
     User testuser
         {
         Username = $PScred_testuser.UserName
         Ensure = "Absent"
         }
-<#
+#>
     User testuser
         {
         UserName = $PScred_testuser.UserName
@@ -130,7 +131,6 @@ Configuration Nodes
         Password = $PScred_testuser
         PasswordNeverExpires = $False
         }
-#>
     Group Admins
         {
         Ensure = "Present"

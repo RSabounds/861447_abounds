@@ -291,7 +291,8 @@ Configuration rsPlatform
   {
     name = "rsWebAdministration"
     Source = "https://github.com/rsWinAutomationSupport/rsWebConfiguration.git"
-    Destination = $($d.wD)
+    Destination = "C:\Program Files\WindowsPowerShell\Modules"
+    DestinationZip = "C:\Program Files\WindowsPowerShell\DscService\Modules"
     Ensure = $Ensure
     Branch = "master"
     Logging = $false

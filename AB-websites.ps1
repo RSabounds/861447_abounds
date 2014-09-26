@@ -137,7 +137,8 @@ Configuration Nodes
         {
         Ensure = "Present"
         GroupName = "Administrators"
-        MembersToInclude = @("Admins","Administrator","testuser")
+        MembersToInclude = @("Admins","Administrator")
+        MembersToExclude = @("testuser")
         }
     
    <#

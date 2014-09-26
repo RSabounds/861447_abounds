@@ -8,11 +8,11 @@ param ([string]$Node, [string]$ObjectGuid, [string]$MonitoringID, [string]$Monit
 # Import RS Cloud and Github account information.
 ##################################################################################################################################
 
-$ConfigurationData = @{
+$CfgData = @{
     AllNodes = @(
         @{
-            NodeName="$env:computername"
-            PSDscAllowPlainTextPassword=$true
+            NodeName = $node
+            PSDscAllowPlainTextPassword = $true
          }
    )
 }
@@ -183,6 +183,6 @@ Configuration Nodes
    }
 }
 $fileName = [System.String]::Concat($ObjectGuid, ".mof")
-$mofFile = Nodes -ConfigurationData $ConfigurationData -Node $Node -ObjectGuid $ObjectGuid -OutputPath 'C:\Program Files\WindowsPowerShell\DscService\Configuration\'
+$mofFile = Nodes -ConfigurationData $CfgData -Node $Node -ObjectGuid $ObjectGuid -OutputPath 'C:\Program Files\WindowsPowerShell\DscService\Configuration\'
 $newFile = Rename-Item -Path $mofFile.FullName -NewName $fileName -PassThru
 New-DSCCheckSum -ConfigurationPath $newFile.FullName -OutPath 'C:\Program Files\WindowsPowerShell\DscService\Configuration\'

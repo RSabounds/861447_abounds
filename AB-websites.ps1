@@ -118,7 +118,7 @@ Configuration Nodes
         {
         UserName = $PScred_testuser.UserName
         Description = "Test User"
-        Disabled = $true
+        Disabled
         Ensure = "Present"
         FullName = "Test User"
         Password = $PScred_testuser
@@ -138,7 +138,6 @@ Configuration Nodes
         Ensure = "Present"
         GroupName = "Administrators"
         MembersToInclude = @("Admins","Administrator")
-        MembersToExclude = @("testuser")
         }
     
    <#

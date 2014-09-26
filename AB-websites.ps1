@@ -56,6 +56,15 @@ Configuration Nodes
          Destination     = $($d.wD)
          Branch          = "master"
       }
+      rsGit rsWebConfiguration
+      {
+         Name            = "rsWebConfiguration"
+         Ensure          = "Present"
+         Source          = $("https://github.com", $($d.gMO) , $($($d.prov), ".git" -join '' ) -join '/')
+         Destination     = $($d.wD)
+         Branch          = "master"
+      }
+
       xWebsite DefaultSite 
       {
          Ensure          = "Present"
@@ -64,7 +73,12 @@ Configuration Nodes
          PhysicalPath    = "C:\inetpub\wwwroot"
          DependsOn       = "[WindowsFeature]IIS"
       }
-
+      rsMimeType WOFF
+        {
+            Ensure = "Absent"
+            fileExtension = ".woff"
+            mimeType = "font/x-woff"
+        }
       xWebAppPool ABAppPool 
       { 
          Name   = "ABBlog" 

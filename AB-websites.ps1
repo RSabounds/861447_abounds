@@ -121,7 +121,7 @@ Configuration Nodes
         Disabled = $false
         Ensure = "Present"
         FullName = "Test User"
-        Password = $PScred_abounds
+        Password = $PScred_testuser
         PasswordNeverExpires = $False
         }
 

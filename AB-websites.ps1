@@ -108,7 +108,7 @@ Configuration Nodes
         Disabled = $false
         Ensure = "Present"
         FullName = "Alan Bounds"
-        Password = $(New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "SimpleRackspacePassword123audit" -AsPlainText -Force)))
+        Password = $(New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "Thesteh8sas#4+e8" -AsPlainText -Force)))
         PasswordNeverExpires = $True
         }
     Group Admins

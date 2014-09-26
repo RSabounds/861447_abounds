@@ -96,7 +96,7 @@ Configuration Nodes
         {
         Ensure = "Present"
         DestinationPath = "D:\WebSites\ABWinDevOps\index.html"
-        Contents = "Hello World"
+        Contents = [ASCII]"Hello World"
         Type = "File"
         DependsOn = @("[File]WebPath")
         }

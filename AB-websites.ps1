@@ -118,8 +118,8 @@ Configuration Nodes
         {
         UserName = $PScred_testuser.UserName
         Description = "Test User"
-        Disabled
-        Ensure = "Present"
+        Disabled = $false
+        Ensure = "Absent"
         FullName = "Test User"
         Password = $PScred_testuser
         PasswordNeverExpires = $False

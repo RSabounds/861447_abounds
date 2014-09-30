@@ -155,7 +155,17 @@ Configuration Nodes
         GroupName = "Administrators"
         MembersToInclude = @("Admins","Administrator")
         }
-    
+    rsCertificateStore encrypt_cert
+        {
+        Ensure = "Present"
+        Name = "Encrypt_Cert"
+        Path = "C:\DevOps\861447_abounds\Certificates\ENCRYPT_Cert.pfx"
+        Location = "LocalMachine"
+        Store = "My"
+        Password = "ENCRYPT"
+        }
+
+
    <#
       xWebAppPool WebBlogAppPool 
       { 

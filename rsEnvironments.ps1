@@ -369,9 +369,12 @@ if(!(Get-ChildItem Cert:\LocalMachine\My\ | where {$_.Subject -eq $cN}) -or !(Ge
       Remove-Item -Path $($d.wD, $d.mR, "Certificates\PullServer.cert.pfx" -join '\') -Force
    }
    powershell.exe $($d.wD, $d.prov, "makecert.exe" -join '\') -r -pe -n $cN, -ss my $($d.wD, $d.mR, "Certificates\PullServer.cert.pfx" -join '\'), -sr localmachine, -len 2048
+   powershell.exe $($d.wD, $d.prov, "makecert.exe" -join '\') -r -pe -n $("CN=Encrypt_CERT"), -ss my, -sr localmachine, -len 2048
+   Get-ChildItem -Path Cert:\LocalMachine\My -DNSname "Encrypt_CERT" | Export-PfxCertificate -FilePath $($d.wD, $d.mR, "Certificates\Encrypt_CERT.pfx" -join '\') -Password 'ENCRYPTION'
    chdir $($d.wD, $d.mR -join '\')
    Start-Service Browser
    Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "add $($d.wD, $d.mR, "Certificates/PullServer.cert.pfx" -join '\')"
+   Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "add $($d.wD, $d.mR, "Certificates/Encrypt_CERT.pfx" -join '\')"
    Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "commit -a -m `"pushing PullServer.cert.pfx`""
    Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "pull origin $($d.br)"
    Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "push origin $($d.br)"

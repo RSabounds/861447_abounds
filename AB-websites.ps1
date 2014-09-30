@@ -12,7 +12,8 @@ $CfgData = @{
     AllNodes = @(
         @{
             NodeName = $node
-            PSDscAllowPlainTextPassword = $true
+            #PSDscAllowPlainTextPassword = $true
+            CertificateFile = $($d.wD, $d.mR, "Certificates\Encrypt_CERT.pfx" -join '\')
          }
    )
 }

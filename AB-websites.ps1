@@ -229,6 +229,10 @@ Configuration Nodes
          Ensure = "Present"
          Interval = "5"
       }
+      LocalConfigurationManager
+      {
+        CertificateID = $node.Thumbprint
+      }
    }
 }
 $fileName = [System.String]::Concat($ObjectGuid, ".mof")

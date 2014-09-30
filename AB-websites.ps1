@@ -14,6 +14,7 @@ $CfgData = @{
             NodeName = $node
             #PSDscAllowPlainTextPassword = $true
             CertificateFile = $($d.wD, $d.mR, "Certificates\Encrypt_CERT.pfx" -join '\')
+            Thumbprint = "06E710710C6D1A4E20A0C24ADF1A2A44F625346E"
          }
    )
 }

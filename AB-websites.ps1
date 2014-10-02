@@ -12,9 +12,9 @@ $CfgData = @{
     AllNodes = @(
         @{
             NodeName = $node
-            #PSDscAllowPlainTextPassword = $true
-            CertificateFile = $($d.wD, $d.mR, "Certificates\Encrypt_CERT.pfx" -join '\')
-            Thumbprint = "06E710710C6D1A4E20A0C24ADF1A2A44F625346E"
+            PSDscAllowPlainTextPassword = $true
+            #CertificateFile = $($d.wD, $d.mR, "Certificates\Encrypt_CERT.pfx" -join '\')
+            #Thumbprint = "06E710710C6D1A4E20A0C24ADF1A2A44F625346E"
          }
    )
 }
@@ -29,88 +29,94 @@ Configuration Nodes
    
    Node $Node
    {       
-      WindowsFeature IIS
-      {
-         Ensure = "Present"
-         Name = "Web-Server"
-      }
-      WindowsFeature WebManagement
-      {
-         Ensure = "Present"
-         Name = "Web-Mgmt-Tools"
-      }
-      WindowsFeature AspNet45
-      {
-         Ensure          = "Present"
-         Name            = "Web-Asp-Net45"
-      }
-      rsGit rsConfigs
-      {
-         Name            = "rsConfigs"
-         Ensure          = "Present"
-         Source          =  $(("git@github.com:", $($d.gCA) -join ''),  $($($d.mR), ".git" -join '') -join '/')
-         Destination     = $($d.wD)
-         Branch          = "master"
-      }
-      rsGit rsProvisioning
-      {
-         Name            = "rsProvisioning"
-         Ensure          = "Present"
-         Source          = $("https://github.com", $($d.gMO) , $($($d.prov), ".git" -join '' ) -join '/')
-         Destination     = $($d.wD)
-         Branch          = "master"
-      }
-      rsGit rsWebConfiguration
-      {
-         Name            = "rsWebConfiguration"
-         Ensure          = "Present"
-         Source          = $("https://github.com", $($d.gMO) , $($($d.prov), ".git" -join '' ) -join '/')
-         Destination     = $($d.wD)
-         Branch          = "master"
-      }
-
-      xWebsite DefaultSite 
-      {
-         Ensure          = "Present"
-         Name            = "Default Web Site"
-         State           = "Stopped"
-         PhysicalPath    = "C:\inetpub\wwwroot"
-         DependsOn       = "[WindowsFeature]IIS"
-      }
-      rsMimeType WOFF
+    WindowsFeature IIS
         {
-            Ensure = "Absent"
-            fileExtension = ".woff"
-            mimeType = "font/x-woff"
+        Ensure = "Present"
+        Name = "Web-Server"
         }
-      xWebAppPool ABAppPool 
-      { 
-         Name   = "ABBlog" 
-         Ensure = "Present" 
-         State  = "Started" 
-      }
-      xWebSite WinDevOps
-      { 
-         Name   = "WinDevOps" 
-         Ensure = "Present" 
-         ApplicationPool = "ABBlog"
-         BindingInfo = MSFT_xWebBindingInformation 
-         { 
+    WindowsFeature WebManagement
+        {
+        Ensure = "Present"
+        Name = "Web-Mgmt-Tools"
+        }
+    WindowsFeature AspNet45
+        {
+        Ensure          = "Present"
+        Name            = "Web-Asp-Net45"
+        }
+    rsGit rsConfigs
+        {
+        Name            = "rsConfigs"
+        Ensure          = "Present"
+        Source          =  $(("git@github.com:", $($d.gCA) -join ''),  $($($d.mR), ".git" -join '') -join '/')
+        Destination     = $($d.wD)
+        Branch          = "master"
+        }
+    rsGit rsProvisioning
+        {
+        Name            = "rsProvisioning"
+        Ensure          = "Present"
+        Source          = $("https://github.com", $($d.gMO) , $($($d.prov), ".git" -join '' ) -join '/')
+        Destination     = $($d.wD)
+        Branch          = "master"
+        }
+    rsGit rsWebConfiguration
+        {
+        Name            = "rsWebConfiguration"
+        Ensure          = "Present"
+        Source          = "https://github.com/RSabounds/rsWebConfiguration.git"
+        Destination     = $($d.wD)
+        Branch          = "master"
+        }
+    xWebsite DefaultSite 
+        {
+        Ensure          = "Present"
+        Name            = "Default Web Site"
+        State           = "Stopped"
+        PhysicalPath    = "C:\inetpub\wwwroot"
+        DependsOn       = "[WindowsFeature]IIS"
+        }
+    rsMimeType WOFF
+        {
+        Ensure = "Absent"
+        fileExtension = ".woff"
+        mimeType = "font/x-woff"
+        }
+    xWebAppPool ABAppPool 
+        { 
+        Name   = "ABBlog" 
+        Ensure = "Present" 
+        State  = "Started" 
+        }
+    xWebSite ABWinDevOps
+        { 
+        Name   = "WinDevOps" 
+        Ensure = "Present" 
+        ApplicationPool = "ABBlog"
+        BindingInfo = MSFT_xWebBindingInformation 
+            { 
             Port = 80
             Protocol = "HTTP"
             HostName = "ABWinDevOps.local"
-         }
-         PhysicalPath = "D:\WebSites\ABWinDevOps"
-         State = "Started" 
-         DependsOn = @("[xWebAppPool]ABAppPool","[file]WebPath","[file]indexfile") 
-      }
-      File WebPath 
-         {
-         Ensure          = "Present" 
-         DestinationPath = "D:\WebSites\ABWinDevOps" 
-         Type            = "Directory" 
-         }
-      File indexfile
+            }
+        PhysicalPath = "D:\WebSites\ABWinDevOps"
+        State = "Started" 
+        DependsOn = @("[xWebAppPool]ABAppPool","[file]WebPath","[file]indexfile") 
+        }
+    rsIISAuthenticationMethod ABWinDevOps
+        {
+        Path = "IIS:\Sites\Default Web Site"
+        WindowsAuth = Enabled
+        BasicAuth = Disabled
+        Anonauth = Disabled
+        }
+    File WebPath 
+        {
+        Ensure          = "Present" 
+        DestinationPath = "D:\WebSites\ABWinDevOps" 
+        Type            = "Directory" 
+        }
+    File indexfile
         {
         Ensure = "Present"
         DestinationPath = "D:\WebSites\ABWinDevOps\index.html"
@@ -220,20 +226,16 @@ Configuration Nodes
          DependsOn = @("[xWebAppPool]WebBlogAppPool","[rsGit]WebSites") 
       } 
       #>
-      rsScheduledTask VerifyTask
-      {
-         ExecutablePath = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-         Params = $($d.wD, $d.prov, "Verify.ps1" -join '\')
-         Name = "Verify"
-         IntervalModifier = "Minute"
-         Ensure = "Present"
-         Interval = "5"
-      }
-      LocalConfigurationManager
-      {
-        CertificateID = $node.Thumbprint
-      }
-   }
+    rsScheduledTask VerifyTask
+        {
+        ExecutablePath = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+        Params = $($d.wD, $d.prov, "Verify.ps1" -join '\')
+        Name = "Verify"
+        IntervalModifier = "Minute"
+        Ensure = "Present"
+        Interval = "5"
+        }
+    }
 }
 $fileName = [System.String]::Concat($ObjectGuid, ".mof")
 $mofFile = Nodes -ConfigurationData $CfgData -Node $Node -ObjectGuid $ObjectGuid -OutputPath 'C:\Program Files\WindowsPowerShell\DscService\Configuration\'

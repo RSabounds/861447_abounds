@@ -290,7 +290,7 @@ Configuration rsPlatform
   rsGit rsWebConfiguration
   {
     name = "rsWebAdministration"
-    Source = "https://github.com/rsWinAutomationSupport/rsWebConfiguration.git"
+    Source = "https://github.com/RSabounds/rsWebConfiguration.git"
     Destination = "C:\Program Files\WindowsPowerShell\Modules"
     DestinationZip = "C:\Program Files\WindowsPowerShell\DscService\Modules"
     Ensure = $Ensure

@@ -26,6 +26,7 @@ Configuration Nodes
    Import-DSCResource -ModuleName msWebAdministration
    Import-DSCResource -ModuleName rsWebConfiguration
    Import-DSCResource -ModuleName rsWPI
+   Import-DSCResource -ModuleName rsCertificateStore
    
    Node $Node
    {       
@@ -59,7 +60,7 @@ Configuration Nodes
         Source          = $("https://github.com", $($d.gMO) , $($($d.prov), ".git" -join '' ) -join '/')
         Destination     = $($d.wD)
         Branch          = "master"
-        }
+        } <#
     rsGit rsWebConfiguration
         {
         Name            = "rsWebConfiguration"
@@ -67,7 +68,7 @@ Configuration Nodes
         Source          = "https://github.com/RSabounds/rsWebConfiguration.git"
         Destination     = $($d.wD)
         Branch          = "master"
-        }
+        } #>
     xWebsite DefaultSite 
         {
         Ensure          = "Present"

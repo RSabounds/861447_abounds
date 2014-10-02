@@ -163,7 +163,7 @@ Configuration Nodes
         Ensure = "Present"
         GroupName = "Administrators"
         MembersToInclude = @("Admins","Administrator")
-        DependsOn = [Group]Admins
+        DependsOn = "[Group]Admins"
         }
     rsCertificateStore encrypt_cert
         {

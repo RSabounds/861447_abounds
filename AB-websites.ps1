@@ -106,9 +106,9 @@ Configuration Nodes
     rsIISAuthenticationMethod ABWinDevOps
         {
         Path = "IIS:\Sites\Default Web Site"
-        WindowsAuth = Enabled
-        BasicAuth = Disabled
-        Anonauth = Disabled
+        windowsAuthentication = Enabled
+        basicAuthentication = Disabled
+        anonymousAuthentication = Disabled
         }
     File WebPath 
         {

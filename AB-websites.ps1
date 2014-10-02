@@ -86,7 +86,8 @@ Configuration Nodes
         { 
         Name   = "ABBlog" 
         Ensure = "Present" 
-        State  = "Started" 
+        State  = "Started"
+        DependsOn = "[WindowsFeature]IIS"
         }
     xWebSite ABWinDevOps
         { 
@@ -101,14 +102,15 @@ Configuration Nodes
             }
         PhysicalPath = "D:\WebSites\ABWinDevOps"
         State = "Started" 
-        DependsOn = @("[xWebAppPool]ABAppPool","[file]WebPath","[file]indexfile") 
+        DependsOn = @("[WindowsFeature]IIS","[xWebAppPool]ABAppPool","[file]WebPath","[file]indexfile") 
         }
     rsIISAuthenticationMethod ABWinDevOps
         {
-        Path = "IIS:\Sites\Default Web Site"
-        windowsAuthentication = Enabled
-        basicAuthentication = Disabled
-        anonymousAuthentication = Disabled
+        Path = "IIS:\Sites\WinDevOps"
+        windowsAuthentication = "Enabled"
+        basicAuthentication = "Disabled"
+        anonymousAuthentication = "Disabled"
+        DependsOn = @("[WindowsFeature]IIS","[xWebSite]ABWinDevOps")
         }
     File WebPath 
         {
@@ -125,8 +127,8 @@ Configuration Nodes
         DependsOn = @("[File]WebPath")
         }
 
-    $PScred_abounds = New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "Fordteh8sas#4+e8" -AsPlainText -Force))
-    $PScred_testuser = New-Object System.Management.Automation.PSCredential ("testuser", (ConvertTo-SecureString "Friendst7shd#5-cX" -AsPlainText -Force))
+    $PScred_abounds = New-Object System.Management.Automation.PSCredential ("abounds", (ConvertTo-SecureString "rdteh8sas#4+e8" -AsPlainText -Force))
+    $PScred_testuser = New-Object System.Management.Automation.PSCredential ("testuser", (ConvertTo-SecureString "iendst7shd#5-cX" -AsPlainText -Force))
     
     User abounds
         {
@@ -161,6 +163,7 @@ Configuration Nodes
         Ensure = "Present"
         GroupName = "Administrators"
         MembersToInclude = @("Admins","Administrator")
+        DependsOn = [Group]Admins
         }
     rsCertificateStore encrypt_cert
         {

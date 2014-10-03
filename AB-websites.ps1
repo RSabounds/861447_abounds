@@ -24,10 +24,10 @@ Configuration Nodes
    Import-DSCResource -ModuleName rsScheduledTask
    Import-DSCResource -ModuleName rsGit
    Import-DSCResource -ModuleName msWebAdministration
-   Import-DSCResource -ModuleName rsWebConfiguration
    Import-DSCResource -ModuleName rsWPI
    Import-DSCResource -ModuleName rsCertificateStore
-   
+   Import-DSCResource -ModuleName rsWebConfiguration
+
    Node $Node
    {       
     WindowsFeature IIS
@@ -39,6 +39,11 @@ Configuration Nodes
         {
         Ensure = "Present"
         Name = "Web-Mgmt-Tools"
+        }
+    WindowsFeature AuthTypes
+        {
+        Ensure = "Present"
+        Name = @("Web-Basic-Auth","Web-Windows-Auth")
         }
     WindowsFeature AspNet45
         {
@@ -60,15 +65,7 @@ Configuration Nodes
         Source          = $("https://github.com", $($d.gMO) , $($($d.prov), ".git" -join '' ) -join '/')
         Destination     = $($d.wD)
         Branch          = "master"
-        } <#
-    rsGit rsWebConfiguration
-        {
-        Name            = "rsWebConfiguration"
-        Ensure          = "Present"
-        Source          = "https://github.com/RSabounds/rsWebConfiguration.git"
-        Destination     = $($d.wD)
-        Branch          = "master"
-        } #>
+        }
     xWebsite DefaultSite 
         {
         Ensure          = "Present"

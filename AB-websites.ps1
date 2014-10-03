@@ -40,10 +40,15 @@ Configuration Nodes
         Ensure = "Present"
         Name = "Web-Mgmt-Tools"
         }
-    WindowsFeature AuthTypes
+    WindowsFeature AuthTypeBasic
         {
         Ensure = "Present"
-        Name = @("Web-Basic-Auth","Web-Windows-Auth")
+        Name = "Web-Basic-Auth"
+        }
+    WindowsFeature AuthTypeWindows
+        {
+        Ensure = "Present"
+        Name = "Web-Windows-Auth"
         }
     WindowsFeature AspNet45
         {

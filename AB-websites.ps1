@@ -113,7 +113,7 @@ Configuration Nodes
         windowsAuthentication = "Enabled"
         basicAuthentication = "Disabled"
         anonymousAuthentication = "Disabled"
-        DependsOn = @("[WindowsFeature]IIS","[xWebSite]ABWinDevOps")
+        DependsOn = @("[WindowsFeature]IIS","[xWebSite]ABWinDevOps","[WindowsFeature]AuthTypeBasic","[WindowsFeature]AuthTypeWindows")
         }
     File WebPath 
         {
